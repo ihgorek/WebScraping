@@ -39,12 +39,10 @@ class NewsVillageParser(object):
 def main():
     n = NewsVillageParser()
     di = n.news_in_business()
-    outputfile = open('test.csv','wb')
-    test = csv.writer(outputfile)
-    for d in di:
-        ans = d + ',' +di[d]
-        test.writerow(ans)
-    outputfile.close()
+    with open('test.csv','w') as outputfile:
+        writer = csv.writer(outputfile)
+        for d in di:
+            writer.writerow( (d,di[d]) )
 
 
 if __name__ == '__main__':
