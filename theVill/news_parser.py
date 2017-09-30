@@ -31,8 +31,6 @@ class NewsVillageParser(object):
             except Exception:
                 title = new.find('h3', class_='post-title').text
             d[link_news]=str(title)
-            # if i == 3:
-            #     break
         return d
 
 
