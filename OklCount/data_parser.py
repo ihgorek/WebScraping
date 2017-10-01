@@ -2,6 +2,7 @@ import requests
 import csv
 from bs4 import BeautifulSoup
 from datetime import datetime
+from multiprocessing import Pool
 
 
 
@@ -41,13 +42,23 @@ def write_csv(data):
         writer.writerow((data['name'],data['address'],data['phone']))
 
 
+def make_all(link, name):
+    adress, phone = (get_page_data(get_html(link)))
+    new_adr = adress.replace('\t', '').replace('\r', '').replace('\n', '').lstrip()
+    new_phone = phone.replace('\t', '').replace('\r', '').replace(' ', '').replace('\n', '')
+    data = {'name': name,
+            'address': new_adr,
+            'phone': new_phone}
+    write_csv(data)
+    print(data)
+
 def main():
+    # 46 sec parsing
     start = datetime.now()
     url = 'http://www.county-clerk.net/county.asp?state=Oklahoma'
     html = get_html(url)
     names,links = get_all_links(html)
     i = 0
-    data = {}
     for i in range(len(links)):
         adress, phone = (get_page_data(get_html(links[i])))
         new_adr = adress.replace('\t','').replace('\r','').replace('\n','').lstrip()
@@ -57,9 +68,10 @@ def main():
                 'phone': new_phone }
         write_csv(data)
         print(data)
-
+    # for multipocessing
+    # with Pool(40) as p:
+    #     p.map(make_all, links)
     end = datetime.now()
-
     total = end - start
     print(total)
 
