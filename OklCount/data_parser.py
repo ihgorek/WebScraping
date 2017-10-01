@@ -71,9 +71,7 @@ def main():
     # for multipocessing
     # with Pool(40) as p:
     #     p.map(make_all, links)
-
     end = datetime.now()
-
     total = end - start
     print(total)
 
