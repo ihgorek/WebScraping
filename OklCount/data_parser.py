@@ -50,8 +50,8 @@ def main():
     data = {}
     for i in range(len(links)):
         adress, phone = (get_page_data(get_html(links[i])))
-        new_adr = adress.replace('\t','').replace('\r','').replace(' ', '')
-        new_phone = phone.replace('\t','').replace('\r','').replace(' ', '')
+        new_adr = adress.replace('\t','').replace('\r','').replace('\n','').lstrip()
+        new_phone = phone.replace('\t','').replace('\r','').replace(' ', '').replace('\n','')
         data = {'name': names[i],
                 'address': new_adr,
                 'phone': new_phone }
