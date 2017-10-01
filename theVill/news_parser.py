@@ -39,8 +39,9 @@ def main():
     di = n.news_in_business()
     with open('test.csv','w') as outputfile:
         writer = csv.writer(outputfile)
+        writer.writerow(('link','news'))
         for d in di:
-            writer.writerow( (d,di[d]) )
+            writer.writerow((d,di[d]))
 
 
 if __name__ == '__main__':
