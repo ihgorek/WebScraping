@@ -111,7 +111,7 @@ def main():
             break
     # Opens the file and writes new information into it.
     # If there is already information in it, it writes down half of it
-    with open( 'boards\\' + word + '.csv', 'a') as f:
+    with open( 'boards/' + word + '.csv', 'a') as f: # windows -> replace('boards/','boards\\')
         writer = csv.writer(f)
         writer.writerow(('Board Url','Board Name','Pins','Followers','Groupb Board Members','Board Description'))
         for i in range(len(names)):
